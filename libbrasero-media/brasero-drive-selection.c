@@ -222,7 +222,7 @@ brasero_drive_selection_update_no_disc_entry (BraseroDriveSelection *self,
 
 	/* FIXME: that needs a string */
 	gtk_list_store_set (GTK_LIST_STORE (model), iter,
-			    NAME_COL, NULL,
+			    NAME_COL, _("No drives present"),
 			    ICON_COL, NULL,
 			    -1);
 
@@ -541,6 +541,7 @@ brasero_drive_selection_constructed (GObject *object)
 
 	brasero_drive_selection_show_type (BRASERO_DRIVE_SELECTION (object),
 					   BRASERO_DRIVE_TYPE_ALL_BUT_FILE);
+	brasero_drive_selection_add_no_disc_entry (BRASERO_DRIVE_SELECTION (object));
 }
 
 static void
