@@ -360,6 +360,39 @@ brasero_drive_selection_show_type (BraseroDriveSelection *selector,
 	}
 }
 
+/**
+ * brasero_drive_selection_get_num_drives:
+ * @selector: a #BraseroDriveSelection
+ *
+ * Gets the number of available drives.
+ *
+ * Return value: a #guint count of available drives.
+ */
+guint
+brasero_drive_selection_get_num_drives (BraseroDriveSelection *selector)
+{
+	GtkTreeModel *model;
+	GtkTreeIter it;
+	BraseroDrive *tmp;
+	guint num = 0;
+
+	model = gtk_combo_box_get_model (GTK_COMBO_BOX (selector));
+	if (!gtk_tree_model_get_iter_first (model, &it))
+		return 0;
+
+	do {
+		gtk_tree_model_get (model, &it,
+				    DRIVE_COL, &tmp,
+				    -1);
+		if (tmp) {
+			num++;
+			g_object_unref (tmp);
+		}
+	} while (gtk_tree_model_iter_next (model, &it));
+
+	return num;
+}
+
 static void
 brasero_drive_selection_drive_added_cb (BraseroMediumMonitor *monitor,
 					BraseroDrive *drive,

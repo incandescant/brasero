@@ -81,6 +81,9 @@ brasero_eject_dialog_activate (GtkDialog *dialog,
 	 * command. The problem is brasero may need to be privileged then as
 	 * cdrecord/cdrdao seem to be. */
 	drive = brasero_drive_selection_get_active (BRASERO_DRIVE_SELECTION (priv->selector));
+	if (!drive)
+		return;
+
 	brasero_drive_unlock (drive);
 
 	/*if (brasero_volume_is_mounted (BRASERO_VOLUME (medium))
@@ -195,10 +198,15 @@ brasero_eject_dialog_init (BraseroEjectDialog *obj)
 					    "media-eject",
 					    GTK_ICON_SIZE_BUTTON);
 	gtk_dialog_add_action_widget (GTK_DIALOG (obj),
-	                              button,
-	                              GTK_RESPONSE_OK);
+				      button,
+				      GTK_RESPONSE_OK);
 	gtk_widget_show (button);
 	priv->eject_button = button;
+
+	if (brasero_drive_selection_get_num_drives (priv->selector) < 1) {
+		gtk_widget_set_sensitive (GTK_WIDGET (priv->selector), FALSE);
+		gtk_widget_set_sensitive (GTK_WIDGET (priv->eject_button), FALSE);
+	}
 }
 
 GtkWidget *

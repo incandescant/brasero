@@ -79,6 +79,9 @@ void
 brasero_drive_selection_show_type (BraseroDriveSelection *selector,
 				   BraseroDriveType type);
 
+guint
+brasero_drive_selection_get_num_drives (BraseroDriveSelection *selector);
+
 G_END_DECLS
 
 #endif /* _BRASERO_DRIVE_SELECTION_H_ */
