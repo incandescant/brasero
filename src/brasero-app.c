@@ -68,7 +68,7 @@
 typedef struct _BraseroAppPrivate BraseroAppPrivate;
 struct _BraseroAppPrivate
 {
-	GApplication *gapp;
+	GtkApplication *gapp;
 
 	BraseroSetting *setting;
 
@@ -2148,14 +2148,14 @@ brasero_app_class_init (BraseroAppClass *klass)
 	g_object_class_install_property (object_class,
 	                                 PROP_GAPP,
 	                                 g_param_spec_object("gapp",
-	                                                     "GApplication",
-	                                                     "The GApplication object",
+	                                                     "GtkApplication",
+	                                                     "The GtkApplication object",
 	                                                     G_TYPE_APPLICATION,
 	                                                     G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 }
 
 BraseroApp *
-brasero_app_new (GApplication *gapp)
+brasero_app_new (GtkApplication *gapp)
 {
 	return g_object_new (BRASERO_TYPE_APP,
 	                     "gapp", gapp,
