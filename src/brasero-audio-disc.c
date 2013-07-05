@@ -1306,7 +1306,8 @@ brasero_audio_disc_split (BraseroAudioDisc *disc)
 	toplevel = gtk_widget_get_toplevel (GTK_WIDGET (disc));
 	gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (toplevel));
 	gtk_window_set_destroy_with_parent (GTK_WINDOW (dialog), TRUE);
-	gtk_window_set_position (GTK_WINDOW (toplevel), GTK_WIN_POS_CENTER_ON_PARENT);
+	gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER_ON_PARENT);
+	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
 
 	uri = brasero_track_stream_get_source (BRASERO_TRACK_STREAM (track), TRUE);
 	brasero_split_dialog_set_uri (BRASERO_SPLIT_DIALOG (dialog),
